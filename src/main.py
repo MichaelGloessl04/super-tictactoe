@@ -33,7 +33,6 @@ cell_size = 50
 
 def main():
     main_loop = True
-    game = get_game()
     while main_loop:
         endscreen = True
         game_running = True
@@ -43,7 +42,7 @@ def main():
         played_moves = []  # which fields are occupied
 
         protocol = {
-            'game': game,
+            'game': get_game(),
             'move': [],
             'time': [],
             'winner': 0
@@ -106,7 +105,7 @@ def main():
                                                      cell_size, cell_size))
             pygame.display.flip()
         
-        game += 1  # update game id
+        
         export(protocol)  # append to csv
 
         # endscreen holds frame till click
@@ -127,7 +126,7 @@ def get_game():
     if not os.path.exists(path):
         return 0
     df = pd.read_csv(path)
-    return df['game'].iloc[-1]
+    return df['game'].iloc[-1] + 1
 
 
 def win_cond(tic_map: []):
