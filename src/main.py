@@ -28,7 +28,7 @@ white = (255, 255, 255)
 black = (0, 0, 0)
 
 map_size = 8
-cell_size = 40
+cell_size = 50
 
 
 def main():
