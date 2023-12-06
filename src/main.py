@@ -1,6 +1,7 @@
 import pygame
 import time
 import os
+import analyze
 import pandas as pd
 
 grid = """
@@ -68,9 +69,11 @@ def main():
                     game_running = False
                     main_loop = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    chosen_field = get_field(pygame.mouse.get_pos())  # get which field was clicked on
+                    # get which field was clicked on
+                    chosen_field = get_field(pygame.mouse.get_pos())
 
-                    if played_moves.count(chosen_field) <= 0:  # check if field is occupied
+                    # check if field is occupied
+                    if played_moves.count(chosen_field) <= 0:
                         map = place_mark(map[:],  # place ascii art on map
                                          chosen_field,
                                          tic_or_toe)
@@ -97,16 +100,16 @@ def main():
                         elif rounds >= 9:  # tie
                             game_running = False
 
-            for i in range(map_size): 
+            for i in range(map_size):
                 for k in range(map_size):
                     color = white if map[i][k] else black
                     pygame.draw.rect(screen, color, (k * cell_size,
                                                      i * cell_size,
                                                      cell_size, cell_size))
             pygame.display.flip()
-        
-        
+
         export(protocol)  # append to csv
+        analyze.show_graph()
 
         # endscreen holds frame till click
         while endscreen:
